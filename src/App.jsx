@@ -163,7 +163,7 @@ export default function App(){
 
   // ═══ RAZORPAY INTEGRATION ═══
   // Change this URL to your deployed backend URL
-  const API_URL = window.location.hostname === "localhost" ? "http://localhost:3001" : "https://your-backend.onrender.com";
+  const API_URL = window.location.hostname === "localhost" ? "http://localhost:3001" : "https://mba-convert-backend.onrender.com";
 
   const handlePay = async () => {
     try {
