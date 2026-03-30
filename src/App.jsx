@@ -280,7 +280,7 @@ export default function App(){
           <div style={{marginTop:10,display:"flex",gap:5,flexWrap:"wrap"}}>{[["CAT",r.col.w.c],["PI",r.col.w.p],["WAT",r.col.w.wt],["ACAD",r.col.w.ac],["WX",r.col.w.wx]].map(([k,v])=>v>0&&<span key={k} style={{background:"var(--inp)",borderRadius:7,padding:"3px 8px",fontSize:10,fontFamily:"var(--fm)"}}><span style={{color:"var(--t3)"}}>{k}</span> <span style={{color:"var(--ac)",fontWeight:700}}>{v}%</span></span>)}</div>
         </div>}
       </div>)}
-      {!paid&&flt.length>3&&<div className="BLO"><div className="BLC">{flt.slice(3,6).map((r,i)=><div key={r.col.id} className="RC" style={{marginBottom:8}}><div className="CM"><div className="CRK">{i+4}</div><div><div className="CN">{r.col.n}</div><div className="TG"><span className={`TGI T${r.col.t}`}>T{r.col.t}</span></div></div></div><div className="CDI"><div className="CP" style={{color:r.co}}>{r.ch}%</div></div></div>)}</div><div className="BLT"><div style={{fontSize:28}}>🔒</div><div style={{fontWeight:700,fontSize:16}}>Unlock All {flt.length} Colleges</div><div style={{color:"var(--t2)",fontSize:13,maxWidth:320,textAlign:"center"}}>Full predictions + factor breakdowns + PDF report</div><button className="BP GP" onClick={handlePay} style={{fontSize:15,padding:"14px 28px"}}>Pay ₹199 — Full Report + PDF</button><div style={{fontSize:10,color:"var(--t3)"}}>Razorpay • UPI / Cards / Wallets</div></div></div>}
+      {!paid&&flt.length>3&&<div className="BLO"><div className="BLC">{flt.slice(3,6).map((r,i)=><div key={r.col.id} className="RC" style={{marginBottom:8}}><div className="CM"><div className="CRK">{i+4}</div><div><div className="CN">{r.col.n}</div><div className="TG"><span className={`TGI T${r.col.t}`}>T{r.col.t}</span></div></div></div><div className="CDI"><div className="CP" style={{color:r.co}}>{r.ch}%</div></div></div>)}</div><div className="BLT"><div style={{fontSize:28}}>🔒</div><div style={{fontWeight:700,fontSize:16}}>Unlock All {flt.length} Colleges</div><div style={{color:"var(--t2)",fontSize:13,maxWidth:320,textAlign:"center"}}>Full predictions + factor breakdowns + PDF report</div><button className="BP GP" onClick={handlePay} style={{fontSize:15,padding:"14px 28px"}}>Pay ₹199 — Full Report + PDF</button><div style={{fontSize:10,color:"var(--t3)"}}>Cashfree • UPI / Cards / Wallets</div></div></div>}
       {paid&&res.length>0&&<div className="CD" style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:14,marginTop:14}}><div><div style={{fontWeight:700,fontSize:15}}>Your Full Report is Ready</div><div style={{color:"var(--t2)",fontSize:12,marginTop:3}}>{elig} colleges analyzed • Print or save as PDF</div></div><button className="BP" onClick={genPDF}>📄 Download PDF</button></div>}
     </>}</div>}
 
@@ -305,9 +305,49 @@ export default function App(){
       {tab===2&&<div style={{display:"grid",gap:12}}>{INS.map((x,i)=><div key={i} className="CD"><div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}><span style={{fontSize:20}}>{x.i}</span><span style={{fontWeight:700,fontSize:14}}>{x.t}</span></div><p style={{color:"var(--t2)",fontSize:12,lineHeight:1.7}}>{x.b}</p></div>)}</div>}
     </div>}
 
+    {pg==="terms"&&<div className="AI"><h2 style={{fontSize:22,fontWeight:700,marginBottom:4}}>Terms & Conditions</h2><p style={{color:"var(--t2)",fontSize:12,marginBottom:24}}>Last updated: March 2026</p>
+      {[["1. Acceptance","By accessing MBA Convert 2026 and making a payment, you agree to these Terms & Conditions. If you do not agree, do not use this service."],
+        ["2. Nature of Service","MBA Convert 2026 is a data-driven prediction tool. All conversion percentages, verdicts, and college recommendations are statistical estimates based on historical admission data and publicly available weightage formulas. They are NOT guarantees of admission, shortlisting, or any outcome."],
+        ["3. No Affiliation","MBA Convert 2026 is an independent tool. It is not affiliated with, endorsed by, or connected to any IIM, IIT, or any other institution listed on the platform."],
+        ["4. Payment","Access to the full report requires a one-time payment of ₹199 (inclusive of all taxes). Payments are processed securely by Cashfree Payments. By paying, you agree to our Refund Policy."],
+        ["5. Accuracy Disclaimer","Admission criteria, cutoffs, and weightages change every year. While we strive for accuracy, MBA Convert 2026 does not guarantee that the data reflects the most current admission policies. Always verify with official college websites."],
+        ["6. Limitation of Liability","MBA Convert 2026 and its creators shall not be liable for any admission outcome, financial loss, or damage arising from reliance on predictions provided by this tool."],
+        ["7. Intellectual Property","All content, data, code, and design on this platform is the intellectual property of MBA Convert 2026. Reproduction, redistribution, or resale of any part of this service is prohibited."],
+        ["8. Governing Law","These terms are governed by the laws of India. Any disputes shall be subject to the jurisdiction of courts in India."],
+        ["9. Contact","For any queries regarding these terms, email us at support@mbaconvert.in"]
+      ].map(([h,b])=><div key={h} className="CD" style={{marginBottom:10}}><div style={{fontWeight:700,fontSize:14,marginBottom:6,color:"var(--t1)"}}>{h}</div><p style={{color:"var(--t2)",fontSize:13,lineHeight:1.7}}>{b}</p></div>)}
+    </div>}
+
+    {pg==="refund"&&<div className="AI"><h2 style={{fontSize:22,fontWeight:700,marginBottom:4}}>Refund Policy</h2><p style={{color:"var(--t2)",fontSize:12,marginBottom:24}}>Last updated: March 2026</p>
+      {[["No Refund Policy","MBA Convert 2026 offers a digital product — instant access to a full personalized prediction report. Because the report is delivered immediately upon payment and cannot be \"returned\", all sales are final. We do not offer refunds once the report has been accessed."],
+        ["Why No Refunds?","The ₹199 payment unlocks access to your complete college-wise prediction report and PDF download. This is a one-time, instantly consumed digital service. Once delivered, the value cannot be reversed."],
+        ["Exceptions","If your payment was charged but you did not receive access to the full report due to a technical error on our end, contact us within 48 hours at support@mbaconvert.in with your payment ID. We will resolve it by either restoring access or issuing a full refund — your choice."],
+        ["Payment Failures","If your payment failed and money was deducted from your account, it will be automatically refunded to your original payment method within 5–7 business days by Cashfree Payments. If not received, email us with your transaction details."],
+        ["Chargebacks","Initiating a chargeback without contacting us first may result in permanent suspension of access. Please reach out to us — we will resolve legitimate issues promptly."],
+        ["Contact","Email: support@mbaconvert.in — We respond within 24 hours."]
+      ].map(([h,b])=><div key={h} className="CD" style={{marginBottom:10}}><div style={{fontWeight:700,fontSize:14,marginBottom:6,color:"var(--t1)"}}>{h}</div><p style={{color:"var(--t2)",fontSize:13,lineHeight:1.7}}>{b}</p></div>)}
+    </div>}
+
+    {pg==="privacy"&&<div className="AI"><h2 style={{fontSize:22,fontWeight:700,marginBottom:4}}>Privacy Policy</h2><p style={{color:"var(--t2)",fontSize:12,marginBottom:24}}>Last updated: March 2026</p>
+      {[["Information We Collect","When you use MBA Convert 2026, we collect: (a) Profile data you enter — name, CAT percentile, academic scores, category, work experience, and self-assessed PI/GD/WAT ratings. (b) Payment data — processed entirely by Cashfree Payments. We do not store your card number, UPI ID, or bank details on our servers."],
+        ["How We Use Your Data","Your profile data is used solely to generate your prediction report within the current session. We do not store your prediction data on our servers after your session ends. Payment records (order ID, payment status) are retained for transaction verification and support purposes only."],
+        ["Third-Party Services","We use Cashfree Payments to process transactions. Cashfree's privacy policy governs the handling of your payment information. We do not share your personal data with any other third party, advertiser, or data broker."],
+        ["Cookies","This site does not use tracking cookies or advertising pixels. Basic session functionality may use browser-local storage."],
+        ["Data Security","We use HTTPS encryption for all data transmission. Payment processing is handled by PCI-DSS compliant infrastructure via Cashfree."],
+        ["Your Rights","You may request deletion of any data associated with your payment (email, name) by contacting support@mbaconvert.in. We will process such requests within 7 business days."],
+        ["Children's Privacy","This service is not directed at individuals under 18 years of age."],
+        ["Contact","For privacy-related concerns, contact: support@mbaconvert.in"]
+      ].map(([h,b])=><div key={h} className="CD" style={{marginBottom:10}}><div style={{fontWeight:700,fontSize:14,marginBottom:6,color:"var(--t1)"}}>{h}</div><p style={{color:"var(--t2)",fontSize:13,lineHeight:1.7}}>{b}</p></div>)}
+    </div>}
+
     <footer style={{textAlign:"center",padding:"40px 0 20px",borderTop:"1px solid var(--br)",marginTop:40,color:"var(--t3)",fontSize:11}}>
       <div style={{fontWeight:600,marginBottom:3}}>MBA Convert 2026</div>
       <div>Based on 3 years of admission data & official weightage formulas. Not affiliated with any IIM.</div>
+      <div style={{marginTop:10,display:"flex",justifyContent:"center",gap:16,flexWrap:"wrap"}}>
+        <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>go("terms")}>Terms & Conditions</span>
+        <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>go("refund")}>Refund Policy</span>
+        <span style={{cursor:"pointer",textDecoration:"underline"}} onClick={()=>go("privacy")}>Privacy Policy</span>
+      </div>
     </footer>
     </div>
   </div>);
