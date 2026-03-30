@@ -161,8 +161,7 @@ export default function App(){
   const elig=res.filter(r=>r.ch>0).length;
   const vis=paid?flt:flt.slice(0,3);
 
-  // ═══ RAZORPAY INTEGRATION ═══
-  // Change this URL to your deployed backend URL
+  // ═══ CASHFREE INTEGRATION ═══
   const API_URL = window.location.hostname === "localhost" ? "http://localhost:3001" : "https://mba-convert-backend.onrender.com";
 
   const handlePay = async () => {
@@ -171,39 +170,28 @@ export default function App(){
       const res = await fetch(`${API_URL}/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: p.name, email: "student@mbaconvert.in", phone: "9999999999" }),
       });
       const data = await res.json();
       if (!data.success) { alert("Could not create order. Try again."); return; }
 
-      // Step 2: Open Razorpay checkout
-      const options = {
-        key: data.key_id,
-        amount: data.amount,
-        currency: data.currency,
-        name: "MBA Convert",
-        description: "Full Report — 60 Colleges + PDF",
-        order_id: data.order_id,
-        handler: async function (response) {
-          // Step 3: Verify payment on backend
-          const vRes = await fetch(`${API_URL}/verify-payment`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            }),
-          });
-          const vData = await vRes.json();
-          if (vData.success) { sPd(true); sP("results"); }
-          else { alert("Payment verification failed. Contact support."); }
-        },
-        prefill: { name: p.name },
-        theme: { color: "#6c63ff" },
-        modal: { ondismiss: () => {} },
-      };
-      const rzp = new window.Razorpay(options);
-      rzp.open();
+      // Step 2: Open Cashfree checkout
+      const cashfree = window.Cashfree({ mode: "production" });
+      cashfree.checkout({
+        paymentSessionId: data.payment_session_id,
+        redirectTarget: "_modal",
+      }).then(async (result) => {
+        if (result.error) { alert("Payment failed. Try again."); return; }
+        // Step 3: Verify payment
+        const vRes = await fetch(`${API_URL}/verify-payment`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order_id: data.order_id }),
+        });
+        const vData = await vRes.json();
+        if (vData.success) { sPd(true); sP("results"); }
+        else { alert("Payment verification failed. Contact support."); }
+      });
     } catch (err) {
       console.error("Payment error:", err);
       alert("Payment failed. Check your connection and try again.");
