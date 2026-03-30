@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 
 const C = [
   {id:1,n:"IIM Ahmedabad",t:1,f:2800000,a:3500000,c:{G:99.20,O:93.50,E:95.00,S:85.00,T:75.00,P:70.00},w:{c:25,p:40,wt:10,ac:15,wx:10},s:400,ps:"AWT+PI"},
@@ -146,6 +146,7 @@ export default function App(){
   const[tab,sT]=useState(0);
   const[p,spr]=useState({name:"",catPercentile:"",category:"GEN",gender:"Male",tenth:"",twelfth:"",graduation:"",gradStream:"Engineering",workex:"0",piRating:4,gdRating:4,watRating:4});
   const u=(k,v)=>spr(x=>({...x,[k]:v}));
+  useEffect(()=>{fetch(`${window.location.hostname==="localhost"?"http://localhost:3001":"https://mba-convert-backend.onrender.com"}/`).catch(()=>{});},[]);
   const go=x=>{sP(x);window.scrollTo({top:0,behavior:"smooth"});};
   const ck=CK[p.category]||"G";
 
